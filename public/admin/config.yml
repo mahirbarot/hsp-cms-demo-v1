@@ -1,0 +1,81 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "public/images"
+public_folder: "/images"
+
+collections:
+  - name: "hero"
+    label: "Hero Section"
+    folder: "content/hero"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Subtitle", name: "subtitle", widget: "string"}
+      - {label: "Background Image", name: "backgroundImage", widget: "image"}
+      - {label: "Published", name: "published", widget: "boolean", default: true}
+
+  - name: "about"
+    label: "About Section"
+    folder: "content/about"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Image", name: "image", widget: "image"}
+      - {label: "Description", name: "description", widget: "text"}
+      - {label: "Vision Title", name: "visionTitle", widget: "string"}
+      - {label: "Vision Text", name: "visionText", widget: "text"}
+      - {label: "Approach Title", name: "approachTitle", widget: "string"}
+      - {label: "Approach Text", name: "approachText", widget: "text"}
+      - {label: "Published", name: "published", widget: "boolean", default: true}
+
+  - name: "services"
+    label: "Services"
+    folder: "content/services"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Description", name: "description", widget: "text"}
+      - {label: "Published", name: "published", widget: "boolean", default: true}
+
+  - name: "projects"
+    label: "Projects"
+    folder: "content/projects"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Category", name: "category", widget: "string"}
+      - {label: "Year", name: "year", widget: "string"}
+      - {label: "Image", name: "image", widget: "image"}
+      - {label: "Description", name: "description", widget: "text"}
+      - {label: "Featured", name: "featured", widget: "boolean", default: false}
+      - {label: "Published", name: "published", widget: "boolean", default: true}
+
+  - name: "gallery"
+    label: "Gallery"
+    folder: "content/gallery"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Image", name: "image", widget: "image"}
+      - {label: "Alt Text", name: "alt", widget: "string"}
+      - {label: "Order", name: "order", widget: "number", default: 0}
+      - {label: "Published", name: "published", widget: "boolean", default: true}
+
+  - name: "footer"
+    label: "Footer"
+    folder: "content/footer"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Company Name", name: "companyName", widget: "string"}
+      - {label: "Tagline", name: "tagline", widget: "string"}
+      - {label: "Copyright Year", name: "copyrightYear", widget: "string"}
+      - {label: "Links", name: "links", widget: "list", fields: [{label: "Text", name: "text", widget: "string"}, {label: "URL", name: "url", widget: "string"}]}
+      - {label: "Published", name: "published", widget: "boolean", default: true}
