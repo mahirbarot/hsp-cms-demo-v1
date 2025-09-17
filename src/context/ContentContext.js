@@ -133,71 +133,54 @@ export const ContentProvider = ({ children }) => {
         setContent(parsedContent);
       } catch (error) {
         console.error('Error loading content:', error);
-        setContent(prev => ({ ...prev, loading: false }));
+        // Set fallback content with loading false
+        setContent({
+          hero: {
+            title: "Shaping the Future",
+            subtitle: "Client Satisfaction Is Our Profit",
+            backgroundImage: "/images/bg-hero-hs.jpg",
+            published: true
+          },
+          about: {
+            title: "About Us",
+            image: "/images/bedroom-hs.jpg",
+            description: "Welcome to our architectural and interior designing firm.",
+            visionTitle: "Our Vision",
+            visionText: "To produce timeless, inventive, and sustainable designs.",
+            approachTitle: "Our Approach", 
+            approachText: "We support a team-based approach to design.",
+            published: true
+          },
+          services: [
+            { title: "Architectural Design", description: "Creating buildings that blend with surroundings.", published: true },
+            { title: "Interior Design", description: "Bringing spaces to life with careful material selection.", published: true },
+            { title: "Structural Design", description: "Ensuring designs adhere to industry standards.", published: true }
+          ],
+          projects: [
+            { id: 1, title: "Enscape", category: "Residential", year: "2023", image: "/images/escape1.png", description: "Contemporary living space.", featured: true, published: true }
+          ],
+          gallery: [
+            { id: 1, src: "/images/37 wiltshire lane, pinner, eastcote, hillingdon, ha5 2ly-model0022 .jpg", alt: 'Architectural Design 1', published: true },
+            { id: 2, src: "/images/blbrd_trh_01.jpg", alt: 'Architectural Design 2', published: true },
+            { id: 3, src: "/images/enscape2.jpg", alt: 'Architectural Design 3', published: true }
+          ],
+          footer: {
+            companyName: "H S Planning Ltd.",
+            tagline: "Shaping the Future",
+            copyrightYear: "2024",
+            links: '[{"text": "Home", "url": "#home"}, {"text": "About", "url": "#about"}, {"text": "Contact", "url": "#contact"}]',
+            published: true
+          },
+          loading: false
+        });
       }
     };
 
     loadContent();
   }, []);
 
-  // Simple markdown parser (you might want to use a proper markdown parser)
-  const parseMarkdown = (markdown) => {
-    if (!markdown) return null;
-    
-    const lines = markdown.split('\n');
-    const data = {};
-    
-    lines.forEach(line => {
-      if (line.startsWith('title:')) {
-        data.title = line.replace('title:', '').trim();
-      } else if (line.startsWith('subtitle:')) {
-        data.subtitle = line.replace('subtitle:', '').trim();
-      } else if (line.startsWith('description:')) {
-        data.description = line.replace('description:', '').trim();
-      } else if (line.startsWith('image:')) {
-        data.image = line.replace('image:', '').trim();
-      } else if (line.startsWith('backgroundImage:')) {
-        data.backgroundImage = line.replace('backgroundImage:', '').trim();
-      } else if (line.startsWith('visionTitle:')) {
-        data.visionTitle = line.replace('visionTitle:', '').trim();
-      } else if (line.startsWith('visionText:')) {
-        data.visionText = line.replace('visionText:', '').trim();
-      } else if (line.startsWith('approachTitle:')) {
-        data.approachTitle = line.replace('approachTitle:', '').trim();
-      } else if (line.startsWith('approachText:')) {
-        data.approachText = line.replace('approachText:', '').trim();
-      } else if (line.startsWith('companyName:')) {
-        data.companyName = line.replace('companyName:', '').trim();
-      } else if (line.startsWith('tagline:')) {
-        data.tagline = line.replace('tagline:', '').trim();
-      } else if (line.startsWith('copyrightYear:')) {
-        data.copyrightYear = line.replace('copyrightYear:', '').trim();
-      }
-    });
-    
-    return data;
-  };
-
-  const parseServices = (markdown) => {
-    if (!markdown) return [];
-    // This would parse multiple service files
-    // For now, return empty array - will be populated by individual service files
-    return [];
-  };
-
-  const parseProjects = (markdown) => {
-    if (!markdown) return [];
-    // This would parse multiple project files
-    // For now, return empty array - will be populated by individual project files
-    return [];
-  };
-
-  const parseGallery = (markdown) => {
-    if (!markdown) return [];
-    // This would parse multiple gallery files
-    // For now, return empty array - will be populated by individual gallery files
-    return [];
-  };
+  // Note: Markdown parsing functions removed as they're not currently used
+  // In a full CMS implementation, these would be used to parse markdown files
 
   const value = {
     content,

@@ -11,7 +11,6 @@ const Gallery = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, threshold: 0.1 });
   const { content } = useContent();
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
   
   // Use CMS content if available, fallback to static content
   const galleryImages = content?.gallery || [
@@ -21,6 +20,37 @@ const Gallery = () => {
     { id: 4, src: familyRoomImage, alt: 'Architectural Design 4' },
     { id: 5, src: enscape2024Image, alt: 'Architectural Design 5' },
   ];
+
+  // Ensure we have images and set initial index safely
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  
+  // Reset index if it's out of bounds
+  React.useEffect(() => {
+    if (galleryImages.length > 0 && currentImageIndex >= galleryImages.length) {
+      setCurrentImageIndex(0);
+    }
+  }, [galleryImages.length, currentImageIndex]);
+
+  // Show loading state if content is still loading
+  if (content?.loading) {
+    return (
+      <section id="gallery" className="py-12 md:py-16 bg-gray-900 overflow-hidden">
+        <div className="container mx-auto px-4">
+          <div className="text-center">
+            <div className="animate-pulse">
+              <div className="h-8 bg-gray-700 rounded w-48 mx-auto mb-8"></div>
+              <div className="h-64 md:h-80 lg:h-96 bg-gray-700 rounded-lg max-w-4xl mx-auto"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  // Don't render if no images
+  if (!galleryImages || galleryImages.length === 0) {
+    return null;
+  }
 
   const nextImage = () => {
     setCurrentImageIndex((prev) => (prev + 1) % galleryImages.length);
@@ -62,11 +92,11 @@ const Gallery = () => {
               transition={{ duration: 0.5 }}
             >
               <img 
-                src={galleryImages[currentImageIndex].src} 
-                alt={galleryImages[currentImageIndex].alt || `Gallery Image ${currentImageIndex + 1}`}
+                src={galleryImages[currentImageIndex]?.src || ''} 
+                alt={galleryImages[currentImageIndex]?.alt || `Gallery Image ${currentImageIndex + 1}`}
                 className="w-full h-64 md:h-80 lg:h-96 object-cover"
                 onError={(e) => {
-                  console.error('Image failed to load:', galleryImages[currentImageIndex].src);
+                  console.error('Image failed to load:', galleryImages[currentImageIndex]?.src);
                 }}
               />
               
@@ -111,8 +141,8 @@ const Gallery = () => {
                 transition={{ duration: 0.3, delay: index * 0.1 }}
               >
                 <img 
-                  src={image.src} 
-                  alt={image.alt || `Thumbnail ${index + 1}`}
+                  src={image?.src || ''} 
+                  alt={image?.alt || `Thumbnail ${index + 1}`}
                   className="w-full h-full object-cover"
                 />
               </motion.button>

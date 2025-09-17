@@ -1,0 +1,27 @@
+{
+  "files": {
+    "main.css": "/static/css/main.8531894f.css",
+    "main.js": "/static/js/main.accb48a7.js",
+    "static/media/escape1.png": "/static/media/escape1.ab8359462b54d34beebb.png",
+    "static/media/blbrd_trh_02.jpg": "/static/media/blbrd_trh_02.d3b734a9b362ed55dee7.jpg",
+    "static/media/blbrd_trh_01.jpg": "/static/media/blbrd_trh_01.24bcd65df250c858a4a8.jpg",
+    "static/media/enscape2.jpg": "/static/media/enscape2.1e0307a6d2ac08c9b98d.jpg",
+    "static/media/enscape3.jpg": "/static/media/enscape3.24c6b73c5392d92e2d8d.jpg",
+    "static/media/bedroom-hs.jpg": "/static/media/bedroom-hs.9d2cebc9c13f696e9c4e.jpg",
+    "static/media/enscape_2024-08-23-17-25-12.jpg": "/static/media/enscape_2024-08-23-17-25-12.a68515f16742a31ea040.jpg",
+    "static/media/37 wiltshire lane, pinner, eastcote, hillingdon, ha5 2ly-model0022 .jpg": "/static/media/37 wiltshire lane, pinner, eastcote, hillingdon, ha5 2ly-model0022 .2062d5fa36c70c38ac92.jpg",
+    "static/media/family room.png": "/static/media/family room.b98b588644115dd78bc9.png",
+    "static/media/bg-hero-hs.jpg": "/static/media/bg-hero-hs.1e4d49b9a6c201ad1362.jpg",
+    "static/media/slick.svg": "/static/media/slick.2630a3e3eab21c607e21.svg",
+    "static/media/slick.eot": "/static/media/slick.a4e97f5a2a64f0ab1323.eot",
+    "static/media/slick.ttf": "/static/media/slick.c94f7671dcc99dce43e2.ttf",
+    "static/media/slick.woff": "/static/media/slick.295183786cd8a1389865.woff",
+    "index.html": "/index.html",
+    "main.8531894f.css.map": "/static/css/main.8531894f.css.map",
+    "main.accb48a7.js.map": "/static/js/main.accb48a7.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.8531894f.css",
+    "static/js/main.accb48a7.js"
+  ]
+}
