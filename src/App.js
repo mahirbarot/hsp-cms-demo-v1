@@ -11,25 +11,32 @@ import Careers from './components/Careers';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 
-function App() {
+// Component that uses the content refresh hook inside the provider
+function AppContent() {
   // Enable content refresh on CMS updates
   useContentRefresh();
 
   return (
+    <div className="bg-black text-white overflow-x-hidden min-h-screen">
+      <Header />
+      <main className="overflow-x-hidden">
+        <Hero />
+        <About />
+        <Services />
+        <Projects />
+        <Gallery />
+        <Careers />
+        <Contact />
+      </main>
+      <Footer />
+    </div>
+  );
+}
+
+function App() {
+  return (
     <ContentProvider>
-      <div className="bg-black text-white overflow-x-hidden min-h-screen">
-        <Header />
-        <main className="overflow-x-hidden">
-          <Hero />
-          <About />
-          <Services />
-          <Projects />
-          <Gallery />
-          <Careers />
-          <Contact />
-        </main>
-        <Footer />
-      </div>
+      <AppContent />
     </ContentProvider>
   );
 }

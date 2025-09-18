@@ -61,10 +61,21 @@ export const ContentProvider = ({ children }) => {
   };
 
   // Load content from markdown files
-  useEffect(() => {
-    const loadContent = async () => {
+  const loadContent = async () => {
       try {
         setContent(prev => ({ ...prev, loading: true }));
+        
+        // Check if content sync info is available
+        let syncInfo = null;
+        try {
+          const syncResponse = await fetch('/.content-sync.json');
+          if (syncResponse.ok) {
+            syncInfo = await syncResponse.json();
+            console.log('Content sync info:', syncInfo);
+          }
+        } catch (error) {
+          console.log('No sync info available, using available content');
+        }
 
         // Load hero content
         let hero = null;
@@ -319,12 +330,21 @@ export const ContentProvider = ({ children }) => {
       }
     };
 
+  useEffect(() => {
     loadContent();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // Function to refresh content manually
+  const refreshContent = () => {
+    console.log('🔄 Manually refreshing content...');
+    loadContent();
+  };
 
   const value = {
     content,
-    setContent
+    setContent,
+    refreshContent
   };
 
   return (

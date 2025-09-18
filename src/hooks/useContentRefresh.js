@@ -1,12 +1,21 @@
 import { useEffect } from 'react';
+import { useContent } from '../context/ContentContext';
 
 export const useContentRefresh = () => {
+  const { refreshContent } = useContent();
   useEffect(() => {
     // Listen for Netlify CMS save events
     const handleCMSUpdate = () => {
-      console.log('CMS content updated, refreshing page...');
-      // Small delay to ensure files are written
-      setTimeout(() => window.location.reload(), 500);
+      console.log('CMS content updated, refreshing content...');
+      // Small delay to ensure files are written and synced
+      setTimeout(() => {
+        if (refreshContent) {
+          refreshContent();
+        } else {
+          // Fallback to page reload if refresh function not available
+          window.location.reload();
+        }
+      }, 1000);
     };
 
     // Listen for custom events from CMS
@@ -51,7 +60,13 @@ export const useContentRefresh = () => {
         console.log('Page focus detected, checking for content updates...');
         sessionStorage.setItem('lastContentRefresh', now.toString());
         // Small delay to check for updates
-        setTimeout(() => window.location.reload(), 1000);
+        setTimeout(() => {
+          if (refreshContent) {
+            refreshContent();
+          } else {
+            window.location.reload();
+          }
+        }, 1000);
       }
     };
 
@@ -62,6 +77,7 @@ export const useContentRefresh = () => {
       window.removeEventListener('message', handleCMSUpdate);
       window.removeEventListener('focus', handleFocus);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 };
 
