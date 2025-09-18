@@ -13,12 +13,12 @@ const Gallery = () => {
   const { content } = useContent();
   
   // Use CMS content if available, fallback to static content
-  const galleryImages = content?.gallery || [
-    { id: 1, src: wiltshireImage, alt: 'Architectural Design 1' },
-    { id: 2, src: blbrdTrh01Image, alt: 'Architectural Design 2' },
-    { id: 3, src: enscape2Image, alt: 'Architectural Design 3' },
-    { id: 4, src: familyRoomImage, alt: 'Architectural Design 4' },
-    { id: 5, src: enscape2024Image, alt: 'Architectural Design 5' },
+  const galleryImages = content?.gallery?.length > 0 ? content.gallery : [
+    { id: 1, src: wiltshireImage, alt: 'Architectural Design 1', title: 'Architectural Design 1' },
+    { id: 2, src: blbrdTrh01Image, alt: 'Architectural Design 2', title: 'Architectural Design 2' },
+    { id: 3, src: enscape2Image, alt: 'Architectural Design 3', title: 'Architectural Design 3' },
+    { id: 4, src: familyRoomImage, alt: 'Architectural Design 4', title: 'Architectural Design 4' },
+    { id: 5, src: enscape2024Image, alt: 'Architectural Design 5', title: 'Architectural Design 5' },
   ];
 
   // Ensure we have images and set initial index safely
@@ -97,6 +97,10 @@ const Gallery = () => {
                 className="w-full h-64 md:h-80 lg:h-96 object-cover"
                 onError={(e) => {
                   console.error('Image failed to load:', galleryImages[currentImageIndex]?.src);
+                  e.target.style.display = 'none';
+                }}
+                onLoad={(e) => {
+                  e.target.style.display = 'block';
                 }}
               />
               
@@ -144,6 +148,10 @@ const Gallery = () => {
                   src={image?.src || ''} 
                   alt={image?.alt || `Thumbnail ${index + 1}`}
                   className="w-full h-full object-cover"
+                  onError={(e) => {
+                    console.error('Thumbnail failed to load:', image?.src);
+                    e.target.style.opacity = '0.5';
+                  }}
                 />
               </motion.button>
             ))}

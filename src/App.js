@@ -1,5 +1,6 @@
 import React from 'react';
 import { ContentProvider } from './context/ContentContext';
+import { useContentRefresh } from './hooks/useContentRefresh';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -11,6 +12,9 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 
 function App() {
+  // Enable content refresh on CMS updates
+  useContentRefresh();
+
   return (
     <ContentProvider>
       <div className="bg-black text-white overflow-x-hidden min-h-screen">
